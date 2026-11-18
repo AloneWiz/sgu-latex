@@ -2,8 +2,9 @@
 #include <vector>
 #include <queue>
 
-void bfs(int start_node, const std::vector<std::vector<int>>& adj_matrix) {
-    int num_vertices = adj_matrix.size();
+void bfs(int start_node, const std::vector < std::vector < int >> & adj_list) {
+    int num_vertices = adj_list.size();
+
     std::vector<bool> visited(num_vertices, false);
     std::vector<int> dist(num_vertices, -1);
     std::queue<int> q;
@@ -16,8 +17,8 @@ void bfs(int start_node, const std::vector<std::vector<int>>& adj_matrix) {
         int current_node = q.front();
         q.pop();
 
-        for (int neighbor = 0; neighbor < num_vertices; ++neighbor) {
-            if (adj_matrix[current_node][neighbor] == 1 && !visited[neighbor]) {
+        for (int neighbor : adj_list[current_node]) {
+            if (!visited[neighbor]) {
                 visited[neighbor] = true;
                 dist[neighbor] = dist[current_node] + 1;
                 q.push(neighbor);
